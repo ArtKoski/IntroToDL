@@ -14,3 +14,8 @@
 - Early stopping?
 - Tarkistaa vaikuttaako transformaatiot (train_transformation) tuloksiin
 
+### Danielin editit
+- Validation tehty treenauksen aikana
+- Test set loss/acc done
+- Early stopping done
+- 
