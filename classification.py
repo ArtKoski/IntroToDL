@@ -69,7 +69,7 @@ class CustomDataset(Dataset):
             # print(filename)
             label.append(1 if filename in value else 0)
         label = torch.tensor(label, dtype=torch.float32)
-        return image, label
+        return image, label, index, image_path
         
 
 
@@ -242,7 +242,48 @@ with torch.no_grad():
 
 print(f'Test Loss: {test_loss:.3f} |  Test Acc: {test_acc*100:.2f}%')  
 
+def testN(num_pics):
+    test_total = 0
+    test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
+    while test_total < num_pics:
+        input, label = data
+        input, label = inputs.to(device), labels.to(device)
+        output = model.forward(inputs)
+        predictions = (outputs > 0.5).int()
 
+        print(label)
+
+        test_total += 1
+        
+
+
+
+        
+
+# def testone(root_dir, image_num):
+    
+    # transform = test_transform
+    # image_path = f'{root_dir}/im{image_num}.jpg'
+    # labels = {}
+    # for label in ['baby', 'bird', 'car', 'clouds', 'dog', 'female', 'flower', 'male', 'night', 'people', 'portrait', 'river', 'sea', 'tree']:
+    #     with open(os.path.join(self.root_dir, "annotations", f"{label}.txt"), "r") as f:
+    #             f.seek(0)
+    #             self.labels[label] = sorted(set(f.read().splitlines()))
+    #             # self.labels[label] = set(f.read().splitlines()) # this is original
+
+
+    # def __getitem__(self, index):
+    #     image_path = os.path.join(self.root_dir, "images", self.image_paths[index])
+    #     image = Image.open(image_path).convert("RGB")
+    #     if self.transform:
+    #         image = self.transform(image)
+    #     label = []
+    #     for key, value in self.labels.items():
+    #         filename = os.path.basename(image_path)[2:-4]
+    #         # print(filename)
+    #         label.append(1 if filename in value else 0)
+    #     label = torch.tensor(label, dtype=torch.float32)
+    #     return image, label
 
 
 
